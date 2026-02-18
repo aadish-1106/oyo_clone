@@ -1,13 +1,11 @@
-"""
-WSGI config for oyo_clone project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
-"""
-
 import os
+
+try:
+    import pymysql
+    pymysql.version_info = (2, 2, 4, "final", 0)
+    pymysql.install_as_MySQLdb()
+except ImportError:
+    pass
 
 from django.core.wsgi import get_wsgi_application
 
