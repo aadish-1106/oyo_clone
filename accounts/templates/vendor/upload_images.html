@@ -1,0 +1,45 @@
+{% extends "utils/base.html" %}
+
+{% block start %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-info text-white">
+                    <h3 class="mb-0">Upload Images</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include "utils/alerts.html" %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Select Image</label>
+                            <input type="file" name="image" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for image in images %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <img src="/media/{{ image.image }}" class="card-img-top"
+                            style="height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <a href="{% url 'delete_image' image.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

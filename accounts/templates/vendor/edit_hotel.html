@@ -1,0 +1,61 @@
+{% extends "utils/base.html" %}
+
+{% block start %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="mb-0">Edit Hotel</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% include "utils/alerts.html" %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Hotel Name</label>
+                            <input type="text" name="hotel_name" class="form-control" value="{{ hotel.hotel_name }}"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="hotel_description" class="form-control" rows="4"
+                                required>{{ hotel.hotel_description }}</textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" name="hotel_price" class="form-control"
+                                    value="{{ hotel.hotel_price }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Offer Price</label>
+                                <input type="number" name="hotel_offer_price" class="form-control"
+                                    value="{{ hotel.hotel_offer_price }}" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Location</label>
+                            <input type="text" name="hotel_location" class="form-control"
+                                value="{{ hotel.hotel_location }}" required>
+                        </div>
+
+                        <!-- Amenities update logic would be more complex, leaving simple for now as per views.py -->
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Update Hotel</button>
+                            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

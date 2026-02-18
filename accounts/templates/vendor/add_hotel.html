@@ -1,0 +1,74 @@
+{% extends "utils/base.html" %}
+
+{% block start %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Add New Hotel</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% include "utils/alerts.html" %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Hotel Name</label>
+                            <input type="text" name="hotel_name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="hotel_description" class="form-control" rows="4" required></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" name="hotel_price" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Offer Price</label>
+                                <input type="number" name="hotel_offer_price" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Location</label>
+                            <input type="text" name="hotel_location" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Amenities</label>
+                            <div class="row">
+                                {% for amenity in amenities %}
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="ameneties"
+                                            value="{{ amenity.id }}" id="amenity_{{ amenity.id }}">
+                                        <label class="form-check-label" for="amenity_{{ amenity.id }}">
+                                            {% if amenity.icon %}
+                                            <img src="/media/{{ amenity.icon }}" style="width: 20px; height: 20px;">
+                                            {% endif %}
+                                            {{ amenity.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Add Hotel</button>
+                            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

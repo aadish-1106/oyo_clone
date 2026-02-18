@@ -1,0 +1,33 @@
+{% extends "utils/base.html" %}
+
+{% block start %}
+
+<div class="container mt-5 pt-5 pb-5">
+
+    <div class="col-6 mx-auto card shadow p-4" style="border:none">
+        
+        <h2 class="text-center mb-4">Vendor Login</h2>
+
+        <form method="POST">
+          {% include "utils/alerts.html" %}
+          {% csrf_token %}
+           
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            </div>
+
+            <p>Don't have an account? <a href="{% url 'register_vendor' %}">Register</a></p>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+    </div>
+
+    </div>
+
+    
+{% endblock %}

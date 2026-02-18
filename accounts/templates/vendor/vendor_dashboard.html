@@ -1,0 +1,48 @@
+{% extends "utils/base.html" %}
+
+{% block start %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>My Hotels</h2>
+                <a href="{% url 'add_hotel' %}" class="btn btn-primary">Add New Hotel</a>
+            </div>
+
+            <div class="row">
+                {% for hotel in hotels %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if hotel.hotel_images.first %}
+                        <img src="/media/{{ hotel.hotel_images.first.image }}" class="card-img-top"
+                            alt="{{ hotel.hotel_name }}" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                        <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No Image"
+                            style="height: 200px; object-fit: cover;">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ hotel.hotel_name }}</h5>
+                            <p class="card-text">{{ hotel.hotel_description|truncatechars:100 }}</p>
+                            <p class="card-text">Price: ${{ hotel.hotel_price }}</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'edit_hotel' hotel.hotel_slug %}"
+                                    class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{% url 'upload_images' hotel.hotel_slug %}"
+                                    class="btn btn-info btn-sm">Images</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info">You haven't added any hotels yet.</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

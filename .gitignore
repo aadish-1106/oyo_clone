@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+project_env/
+venv/
+env/
+.env
+
+# Django
+db.sqlite3
+*.log
+staticfiles/
+media/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test output
+test_output*.txt
+
+# Gemini
+.gemini/
